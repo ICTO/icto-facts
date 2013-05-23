@@ -7,7 +7,7 @@ output = system('modinfo vga2usb')
 if output then
   Facter.add(:vga2usb_version) do
     setcode do
-        Facter::Util::Resolution.exec('dkms status vga2usb -k `uname -r`')
+        Facter::Util::Resolution.exec('dkms status vga2usb -k `uname -r` | cut -d "," -f 2')
     end
   end
 end
