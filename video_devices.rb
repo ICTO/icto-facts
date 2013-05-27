@@ -5,7 +5,7 @@
 Dir.chdir('/dev')
 devices = Dir.glob('video[0-9]')
 devices.each_with_index do |dev, i|
-  
+
   Facter.add("#{dev}card") do
     setcode do
       Facter::Util::Resolution.exec("v4l-info /dev/#{dev} | awk '/card/' | awk -F '\"' '{print $2}'")

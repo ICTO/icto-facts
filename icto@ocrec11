@@ -8,8 +8,10 @@ Facter.add(:apache_version) do
   end
 end
 
-Facter.add(:apache_sites) do
-  setcode do
-    Facter::Util::Resolution.exec('/usr/sbin/apache2ctl -S')
+if output
+  Facter.add(:apache_sites) do
+    setcode do
+      Facter::Util::Resolution.exec('/usr/sbin/apache2ctl -S')
+    end
   end
 end
