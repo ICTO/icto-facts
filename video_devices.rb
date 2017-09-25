@@ -23,6 +23,12 @@ devices.each_with_index do |dev, i|
       Facter::Util::Resolution.exec("v4l-info /dev/#{dev} | awk '/version/' | awk -F ':' '{print $2}'")
     end
   end
+
+  Facter.add("#{dev}videosignal") do
+    setcode do
+      Facter::Util::Resolution.exec("v4l2-ctl -d /dev/#{dev} --get-input")
+    end
+  end
 end
 
 count = Dir.glob('video[0-9]').count()
