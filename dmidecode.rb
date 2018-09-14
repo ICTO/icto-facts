@@ -11,7 +11,7 @@ if FileTest.exists?("/usr/sbin/dmidecode")
       output.split("Handle").each do |line|
         if line =~ /#{key}/  and line =~ /#{value} (\w.*)\n*./
           result = $1
-          Facter.add(value.chomp(':')) do
+          Facter.add(value.chomp(':').tr(" ","_")) do
             confine :kernel => :linux
             setcode do
               result
